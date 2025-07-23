@@ -13,7 +13,7 @@ const showMathsStepsTool = new DynamicStructuredTool({
   }),
   func: async ({ question }) => {
     const pro = new ChatGoogleGenerativeAI({
-      model: "gemini-1.5-flash",
+      model: "gemini-1.5-pro",
       apiKey: process.env.GOOGLE_API_KEY!,
       temperature: 0,
     });
