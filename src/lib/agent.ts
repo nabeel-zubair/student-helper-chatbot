@@ -1,11 +1,11 @@
-import { ChatGoogleGenerativeAI } from "@langchain/google-genai";
-import { createToolCallingAgent, AgentExecutor } from "langchain/agents";
+import { ChatGoogleGenerativeAI } from '@langchain/google-genai';
+import { createToolCallingAgent, AgentExecutor } from 'langchain/agents';
 import {
   ChatPromptTemplate,
   MessagesPlaceholder,
-} from "@langchain/core/prompts";
+} from '@langchain/core/prompts';
 
-import { showMathsStepsTool, askQuizQuestionTool } from "./tools";
+import { showMathsStepsTool, askQuizQuestionTool } from './tools';
 
 let executorPromise: Promise<AgentExecutor> | null = null;
 
@@ -13,18 +13,18 @@ async function buildExecutor() {
   const tools = [showMathsStepsTool, askQuizQuestionTool];
 
   const llm = new ChatGoogleGenerativeAI({
-    model: "gemini-1.5-flash",
+    model: 'gemini-2.5-flash',
     apiKey: process.env.GOOGLE_API_KEY!,
     temperature: 0,
   });
 
   const llmWithTools = llm.bindTools(tools);
 
-  const toolList = tools.map((t) => `- ${t.name}: ${t.description}`).join("\n");
+  const toolList = tools.map((t) => `- ${t.name}: ${t.description}`).join('\n');
 
   const prompt = ChatPromptTemplate.fromMessages([
     [
-      "system",
+      'system',
       `You are a routing assistant. You may call AT MOST ONE tool.
 
 TOOLS:
@@ -46,8 +46,8 @@ Assistant: (call showMathsStepsTool)
 User: "What's the capital of France?"
 Assistant: (answer directly)`,
     ],
-    ["user", "{input}"],
-    new MessagesPlaceholder("agent_scratchpad"),
+    ['user', '{input}'],
+    new MessagesPlaceholder('agent_scratchpad'),
   ]);
 
   const agent = await createToolCallingAgent({

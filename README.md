@@ -57,7 +57,7 @@ GOOGLE_API_KEY=your_google_api_key_here
 ```
 
 > ✅ Get your API key from [Google AI Studio](https://makersuite.google.com/app/apikey)  
-> ✅ Enable both `gemini-1.5-flash` and `gemini-1.5-pro`  
+> ✅ Enable both `gemini-2.5-flash` and `gemini-2.5-pro`  
 > ⚠️ Do **not** use `NEXT_PUBLIC_` prefix
 
 ---
@@ -190,7 +190,7 @@ curl -X POST http://localhost:3000/api/chat \
 
 ## 🧠 Agent Logic Summary
 
-- Uses `gemini-1.5-flash` by default
+- Uses `gemini-2.5-flash` by default
 - Receives tools as input
 - If Gemini Flash determines a tool is needed:
   - It calls that tool using LangChain's tool system
